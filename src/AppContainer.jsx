@@ -1,15 +1,23 @@
 import { connect } from "react-redux";
 import App from "./App";
-import { updateTextAC } from "./redux/toDoReducer";
+import { addNewTaskAC, updateTextAC } from "./redux/toDoReducer";
 
 const mapStateToProps = (state)=>{
     return{
-        TaskText: state.toDoApp.TaskText
+        TaskText: state.toDoApp.TaskText,
+        taskData: state.toDoApp.taskData
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        updateText: (newText)=> dispatch( updateTextAC(newText) ),
+        addNewTask: () => dispatch( addNewTaskAC() ) 
     }
 }
 
 
 
-const AppContainer = connect(mapStateToProps, { updateText: (newText)=>updateTextAC(newText) } )(App)
+const AppContainer = connect(mapStateToProps, mapDispatchToProps )(App)
 
 export default AppContainer
