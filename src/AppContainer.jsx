@@ -12,7 +12,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         updateText: (newText)=> dispatch( updateTextAC(newText) ),
-        addNewTask: () => dispatch( addNewTaskAC() ) 
+        addNewTask: (time) => dispatch( addNewTaskAC(time) ) 
     }
 }
 

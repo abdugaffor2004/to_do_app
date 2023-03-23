@@ -10,11 +10,11 @@ let dateData = new Date()
         let time = dateData.toLocaleTimeString()
 
 const initialState = {
-  TaskText: 'tomorrow buy milk',
+  TaskText: '',
   taskData: [ 
-    { id: 1, newTaskText: 'Inna lilahi inna ilaihi radzhiun', date: {year, day, month, dayDigit, time}},
-    { id: 2, newTaskText: 'Fi aman Allah', date: {year, day, month, dayDigit, time}},
-    { id: 3, newTaskText: 'Allahuma nimal waqil', date: {year, day, month, dayDigit, time}}
+    // `{ id: 1, newTaskText: 'Inna lilahi inna ilaihi radzhiun', date: {year, day, month, dayDigit, time}},
+    // { id: 2, newTaskText: 'Fi aman Allah', date: {year, day, month, dayDigit, time}},
+    // { id: 3, newTa`skText: 'Allahuma nimal waqil', date: {year, day, month, dayDigit, time}}
 
   ]
 };
@@ -33,14 +33,18 @@ const toDoReducer = (state = initialState, action) => {
       let newTask = {
         id: 4,
         newTaskText: state.TaskText,
-        date: {year, day, month, dayDigit, time}
+        date: {year, day, month, dayDigit, time: action.time}
       }
 
       let stateCopy ={
         ...state,
         taskData: [...state.taskData]
       }
-      stateCopy.taskData.push(newTask)
+      if(state.TaskText !== ""){stateCopy.taskData.push(newTask)}
+      
+
+      stateCopy.TaskText = ''
+
       return stateCopy
     }
 
@@ -52,8 +56,8 @@ export let updateTextAC = (newText) => {
   return { type: UPDATE_TEXT, newText };
 };
 
-export let addNewTaskAC = () =>{
-  return {type: ADD_NEW_TASK}
+export let addNewTaskAC = (time) =>{
+  return {type: ADD_NEW_TASK, time}
 }
 
 

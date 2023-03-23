@@ -4,15 +4,17 @@ import Task from './Task';
 
 let App = (props) => {
 
-  const addNewTaskCaller = () => {
-    props.addNewTask()
-  }
 
   const updateTextCaller = (event)=>{
     let value = event.target.value
     props.updateText(value)
   }
 
+  const addNewTaskCaller = () => {
+    let date = new Date
+    let time = date.toLocaleTimeString()
+    props.addNewTask(time)
+  }
 
   let taskElements = props.taskData.map( item => <Task key={item.id} newTaskText={item.newTaskText} date={item.date} /> )
 
