@@ -12,22 +12,23 @@ let App = (props) => {
 
   const addNewTaskCaller = () => {
     let date = new Date
-    let time = date.toLocaleTimeString()
+    let time = date.toLocaleTimeString() // Отправляем актуальное время добавления заметки 
     props.addNewTask(time)
   }
 
-  let taskElements = props.taskData.map( item => <Task key={item.id} newTaskText={item.newTaskText} date={item.date} /> )
+
+  let taskElements = props.taskData.map( item => <Task taskData={props.taskData} deleteTask={props.deleteTask}  key={item.id} newTaskText={item.newTaskText} date={item.date} /> )
 
   return (
     <div className={s.App}>
+
+      {taskElements}
+
       <div className={s.container}>
         <textarea onChange={updateTextCaller} value={props.TaskText} rows="5"></textarea>
         <div className={s.controlls}>
           <button onClick={addNewTaskCaller} type="submit">Add</button>
         </div>
-
-        {taskElements}
-
       </div>
     </div>
   );

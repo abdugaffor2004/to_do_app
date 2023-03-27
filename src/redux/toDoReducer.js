@@ -1,6 +1,7 @@
 
 const UPDATE_TEXT = 'UPDATE-TEXT ';
 const ADD_NEW_TASK = 'ADD-NEW-TASK';
+const DELETE_TASK = "DELETE-TASK"
 
 let dateData = new Date()
         let year = dateData.getFullYear()
@@ -30,8 +31,9 @@ const toDoReducer = (state = initialState, action) => {
 
     case ADD_NEW_TASK:{
 
+
       let newTask = {
-        id: 4,
+        id: 1,
         newTaskText: state.TaskText,
         date: {year, day, month, dayDigit, time: action.time}
       }
@@ -40,12 +42,36 @@ const toDoReducer = (state = initialState, action) => {
         ...state,
         taskData: [...state.taskData]
       }
-      if(state.TaskText !== ""){stateCopy.taskData.push(newTask)}
+      if(state.TaskText !== ""){stateCopy.taskData.push(newTask);}
       
 
       stateCopy.TaskText = ''
 
       return stateCopy
+    }
+
+
+    case DELETE_TASK:{
+      return{
+        ...state,
+        taskData: state.taskData.map( el =>{
+            if(el.newTaskText === action.taskText){
+              let index = state.taskData.indexOf(el)
+              console.log(el)
+              
+              for(let key in el){
+                delete el[key]
+              }
+
+              return el
+            }
+            return el
+        } )
+        
+      }
+
+      
+
     }
 
     default: return state
@@ -58,6 +84,10 @@ export let updateTextAC = (newText) => {
 
 export let addNewTaskAC = (time) =>{
   return {type: ADD_NEW_TASK, time}
+}
+
+export let deleteTaskAC = (taskText) =>{
+  return {type: DELETE_TASK, taskText}
 }
 
 
