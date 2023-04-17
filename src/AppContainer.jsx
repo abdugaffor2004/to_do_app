@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         updateText: (newText)=> dispatch( updateTextAC(newText) ),
         addNewTask: (time) => dispatch( addNewTaskAC(time) ),
-        deleteTask: (taskText) => dispatch( deleteTaskAC(taskText) )
+        // deleteTask: (taskText) => dispatch( deleteTaskAC(taskText) )
     }
 }
 
