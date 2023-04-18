@@ -43,8 +43,8 @@ let App = (props) => {
     </div>
 
     <div className={s.container}>
-      <input placeholder='Enter Title' type='text' onChange={updateTitleTextCaller} value={props.taskTitle} />
-      <input placeholder='Enter Description' type="text" onChange={updateDescriptionTextCaller} value={props.taskDescription} />
+      <input maxlength="100" placeholder='Enter Title' type='text' onChange={updateTitleTextCaller} value={props.taskTitle} />
+      <input maxlength="250" placeholder='Enter Description' type="text" onChange={updateDescriptionTextCaller} value={props.taskDescription} />
       <button onClick={addNewTaskCaller} type="submit">Add</button>
       
     </div>

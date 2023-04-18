@@ -13,22 +13,33 @@ const Task = (props)=>{
     let uncompleteCaller = () =>{
         props.uncomplete( props.taskId )
     }
-debugger
+
     return(
         
             <div className={s.task}>
 
                 <div className={s.content}>
+
                     {/* <span> {props.date.time}  </span> */}
-                    <h3 className={s.taskTitle}> {props.newTaskTitle} </h3>
-                    <p> {props.newTaskDescription} </p>
+                    <h3 className={s.taskTitle}>
+
+                   {/* { props.completedStatus 
+                   ? <span style={{textDecorationLine: 'line-through'}}> {props.newTaskTitle} </span> 
+                   :<span> {props.newTaskTitle} </span>} Так тоже можно. Просто подменяем спаны в зависимости от CompletedStatus */}
+
+                   <span className={props.completedStatus ? s.done : undefined }> {props.newTaskTitle} </span>
+                        
+                    </h3>
+
+                    <p className={props.completedStatus ? s.done : undefined}> {props.newTaskDescription} </p>
                 </div>
 
                 <div className={s.controlls}> 
                 {
                     props.completedStatus ? 
-                    <button onClick={uncompleteCaller} type='button'> <img src={DoneIconUncompleted} alt="uncompleted" /> </button>
-                    : <button onClick={completeCaller} type='button'> <img src={DoneIconCompleted} alt="completed" /> </button>
+                    <button onClick={uncompleteCaller} type='button'> <img src={DoneIconCompleted} alt="completed" /> </button>
+                    : <button onClick={completeCaller} type='button'> <img src={DoneIconUncompleted} alt="uncompleted" /> </button>
+                     
                 }
                     
 
