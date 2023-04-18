@@ -1,7 +1,10 @@
 
-const UPDATE_TEXT = 'UPDATE-TEXT ';
+const UPDATE_DESCRIPTION = 'UPDATE-DESCRIPTION';
+const UPDATE_TITLE = 'UPDATE-TITLE'
 const ADD_NEW_TASK = 'ADD-NEW-TASK';
 const DELETE_TASK = "DELETE-TASK"
+const COMPLETE = "COMPLETE"
+const UNCOMPLETE = "UNCOMPLETE"
 
 // let dateData = new Date()
 //         let year = dateData.getFullYear()
@@ -10,31 +13,44 @@ const DELETE_TASK = "DELETE-TASK"
 //         let dayDigit = dateData.toLocaleString('default', {day:"2-digit"})
 
 const initialState = {
-  TaskText: '',
-  taskData: [ 
-    // `{ id: 1, newTaskText: 'Inna lilahi inna ilaihi radzhiun', date: {year, day, month, dayDigit, time}},
-    // { id: 2, newTaskText: 'Fi aman Allah', date: {year, day, month, dayDigit, time}},
-    // { id: 3, newTa`skText: 'Allahuma nimal waqil', date: {year, day, month, dayDigit, time}}
-
-  ]
+  taskDescription: '',
+  taskTitle: '',
+  taskData: []
 };
 
 const toDoReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case UPDATE_TEXT: {
-      return{
-        ...state,
-        TaskText: action.newText
-      }
+    // case UPDATE_TEXT: {
+    //   return{
+    //     ...state,
+    //     taskDescription: action.newText,
+    //     taskTitle: action.newText
+    //   }
+    // } // На будущее: параллельный ввод текста. Получилось случайно
+
+    case UPDATE_TITLE: {
+        return{
+          ...state,
+          taskTitle: action.newTitle
+        }
+    }
+
+    case UPDATE_DESCRIPTION: {
+        return{
+          ...state,
+          taskDescription: action.newDescription
+        }
     }
 
     case ADD_NEW_TASK:{
 
 
       let newTask = {
-        id: 1,
-        newTaskText: state.TaskText,
+        id: Math.floor(Math.random() * 100),
+        newTaskTitle: state.taskTitle,
+        newTaskDescription: state.taskDescription,
+        isCompleted: false
         // date: {year, day, month, dayDigit, time: action.time}
       }
 
@@ -45,18 +61,48 @@ const toDoReducer = (state = initialState, action) => {
       if(state.TaskText !== ""){stateCopy.taskData.push(newTask);}
       
 
-      stateCopy.TaskText = ''
+      stateCopy.taskTitle = ''
+      stateCopy.taskDescription = ''
 
       return stateCopy
     }
 
+    case COMPLETE:{
+      return {
+        ...state,
+        taskData: state.taskData.map((task) => {
+          if (task.id === action.taskId) {
+            return { ...task, isCompleted: true };
+          }
+
+          return task;
+        }),
+      };
+    }
+
+    case UNCOMPLETE:{
+      return {
+        ...state,
+       taskData: state.taskData.map((task) => {
+          if (task.id === action.taskId) {
+            return { ...task, isCompleted: false };
+          }
+
+          return task;
+        }),
+      };
+    }
 
     default: return state
   }
 };
 
-export let updateTextAC = (newText) => {
-  return { type: UPDATE_TEXT, newText };
+export let updateTitleAC = (newTitle) => {
+  return { type: UPDATE_TITLE, newTitle };
+};
+
+export let updateDescriptionAC = (newDescription) => {
+  return { type: UPDATE_DESCRIPTION, newDescription };
 };
 
 export let addNewTaskAC = () =>{
@@ -67,5 +113,12 @@ export let deleteTaskAC = (taskText) =>{
   return {type: DELETE_TASK, taskText}
 }
 
+export let CompleteAC = (taskId) =>{
+  return {type: COMPLETE, taskId}
+}
+
+export let UncompleteAC = (taskId) =>{
+  return {type: UNCOMPLETE, taskId}
+}
 
 export default toDoReducer;

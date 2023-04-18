@@ -1,19 +1,23 @@
 import { connect } from "react-redux";
 import App from "./App";
-import { addNewTaskAC, deleteTaskAC, updateTextAC } from "./redux/toDoReducer";
+import { CompleteAC, UncompleteAC, addNewTaskAC, updateDescriptionAC, updateTitleAC } from "./redux/toDoReducer";
 
 const mapStateToProps = (state)=>{
     return{
-        TaskText: state.toDoApp.TaskText,
+        taskTitle: state.toDoApp.taskTitle,
+        taskDescription: state.toDoApp.taskDescription,
         taskData: state.toDoApp.taskData
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        updateText: (newText)=> dispatch( updateTextAC(newText) ),
+        // updateText: (newText)=> dispatch( updateTextAC(newText) ),
+        updateTitleText: (newTitle) => dispatch( updateTitleAC(newTitle) ),
+        updateDescriptionText: (newDescription) => dispatch( updateDescriptionAC(newDescription) ),
         addNewTask: (time) => dispatch( addNewTaskAC(time) ),
-        // deleteTask: (taskText) => dispatch( deleteTaskAC(taskText) )
+        complete: (taskId) => dispatch( CompleteAC(taskId) ),
+        uncomplete: (taskId) => dispatch( UncompleteAC(taskId) ) 
     }
 }
 

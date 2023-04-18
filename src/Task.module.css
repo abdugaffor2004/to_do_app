@@ -45,6 +45,11 @@
     background: #fff;
     border: none;
     border-radius: 5px;
+    transition: opacity ease 0.1s;
+}
+
+.controlls button:active{
+    opacity: 0.4;
 }
 
 .controlls button img{

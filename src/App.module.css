@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 body,
 .App{
   background-color: rgb(250, 238, 228);
-  
+  font-family: 'Montserrat', sans-serif;
 }
 
 .headerText{
@@ -54,4 +56,11 @@ body,
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   gap: 10px;
+
+  transition: all ease-in-out 0.4s;
+}
+
+.container input{
+  padding-left: 12px;
+  font-size: 14px;
 }

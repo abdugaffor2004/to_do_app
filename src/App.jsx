@@ -5,10 +5,20 @@ import Task from './Task';
 let App = (props) => {
 
 
-  const updateTextCaller = (event)=>{
-    let value = event.target.value
-    props.updateText(value)
+  // const updateTextCaller = (event)=>{
+  //   let value = event.target.value
+  //   props.updateText(value)
+  // }
+
+  const updateTitleTextCaller = (event)=>{
+      let value = event.target.value
+      props.updateTitleText(value)
   }
+
+  const updateDescriptionTextCaller = (event)=>{
+    let value = event.target.value
+    props.updateDescriptionText(value)
+}
 
   const addNewTaskCaller = () => {
     // let date = new Date
@@ -17,7 +27,13 @@ let App = (props) => {
   }
 
 
-  let taskElements = props.taskData.map( item => <Task taskData={props.taskData} deleteTask={props.deleteTask}  key={item.id} newTaskText={item.newTaskText} date={item.date} /> )
+  let taskElements = props.taskData.map( item => <Task key={item.id}
+                                                      taskId = {item.id} 
+                                                      newTaskTitle={item.newTaskTitle} 
+                                                      newTaskDescription={item.newTaskDescription}
+                                                      complete={props.complete}
+                                                      uncomplete={props.uncomplete}
+                                                      completedStatus={item.isCompleted} />)
 
   return (
     <div className={s.App}>
@@ -27,19 +43,16 @@ let App = (props) => {
     </div>
 
     <div className={s.container}>
-      <input type='text' onChange={updateTextCaller} value={props.TaskText} />
-      <input type="text" />
+      <input placeholder='Enter Title' type='text' onChange={updateTitleTextCaller} value={props.taskTitle} />
+      <input placeholder='Enter Description' type="text" onChange={updateDescriptionTextCaller} value={props.taskDescription} />
       <button onClick={addNewTaskCaller} type="submit">Add</button>
       
     </div>
 
     <div className={s.tasksContainer}>
 
-      {/* {taskElements} */}
-      <Task />
-      <Task />
-      <Task />
-      <Task />
+      {taskElements}
+      
 
     </div>
 
