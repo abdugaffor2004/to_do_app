@@ -33,7 +33,8 @@ let App = (props) => {
                                                       newTaskDescription={item.newTaskDescription}
                                                       complete={props.complete}
                                                       uncomplete={props.uncomplete}
-                                                      completedStatus={item.isCompleted} />)
+                                                      completedStatus={item.isCompleted}
+                                                      deleteTask={props.deleteTask} />)
 
   return (
     <div className={s.App}>
@@ -43,8 +44,8 @@ let App = (props) => {
     </div>
 
     <div className={s.container}>
-      <input maxlength="100" placeholder='Enter Title' type='text' onChange={updateTitleTextCaller} value={props.taskTitle} />
-      <input maxlength="250" placeholder='Enter Description' type="text" onChange={updateDescriptionTextCaller} value={props.taskDescription} />
+      <input maxLength="100" placeholder='Enter Title' type='text' onChange={updateTitleTextCaller} value={props.taskTitle} />
+      <input maxLength="250" placeholder='Enter Description' type="text" onChange={updateDescriptionTextCaller} value={props.taskDescription} />
       <button onClick={addNewTaskCaller} type="submit">Add</button>
       
     </div>

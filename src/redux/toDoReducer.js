@@ -2,9 +2,9 @@
 const UPDATE_DESCRIPTION = 'UPDATE-DESCRIPTION';
 const UPDATE_TITLE = 'UPDATE-TITLE'
 const ADD_NEW_TASK = 'ADD-NEW-TASK';
-const DELETE_TASK = "DELETE-TASK"
 const COMPLETE = "COMPLETE"
 const UNCOMPLETE = "UNCOMPLETE"
+const DELETE_TASK = "DELETE-TASK"
 
 // let dateData = new Date()
 //         let year = dateData.getFullYear()
@@ -58,7 +58,7 @@ const toDoReducer = (state = initialState, action) => {
         ...state,
         taskData: [...state.taskData]
       }
-      if(state.TaskText !== ""){stateCopy.taskData.push(newTask);}
+      if(state.taskTitle && state.taskDescription !== ""){stateCopy.taskData.push(newTask);}
       
 
       stateCopy.taskTitle = ''
@@ -93,6 +93,25 @@ const toDoReducer = (state = initialState, action) => {
       };
     }
 
+    case DELETE_TASK:{
+
+     let taskDataMod = state.taskData.map( task =>{
+        if (task.id === action.taskId) {
+          
+          return delete {...task}; // удаляем объект по конкретному айдишнику. 
+                                  //Но проблема в том что вместо удаленного объекта появляется значение true и в разметке исчезает только текст, а сама форма остается 
+        }
+
+        return task;
+      } ) // Удаляем объект(по id) из массива. Но вместо него появляется true значение, поэтому мы затем фильтруем модифицированный массив
+
+      return{
+        ...state,
+        taskData: taskDataMod.filter( item => item!==true ) // Удаление true элементов из массива
+        // Мы здесь не спрэдаем новый массив([...arr]), так как filter возвращает уже новый массив
+      }
+    }
+
     default: return state
   }
 };
@@ -109,16 +128,16 @@ export let addNewTaskAC = () =>{
   return {type: ADD_NEW_TASK}
 }
 
-export let deleteTaskAC = (taskText) =>{
-  return {type: DELETE_TASK, taskText}
-}
-
 export let CompleteAC = (taskId) =>{
   return {type: COMPLETE, taskId}
 }
 
 export let UncompleteAC = (taskId) =>{
   return {type: UNCOMPLETE, taskId}
+}
+
+export let deleteTaskAC = (taskId) =>{
+  return {type: DELETE_TASK, taskId}
 }
 
 export default toDoReducer;

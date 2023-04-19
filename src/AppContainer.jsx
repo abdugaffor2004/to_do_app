@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import App from "./App";
-import { CompleteAC, UncompleteAC, addNewTaskAC, updateDescriptionAC, updateTitleAC } from "./redux/toDoReducer";
+import { CompleteAC, UncompleteAC, addNewTaskAC, deleteTaskAC, updateDescriptionAC, updateTitleAC } from "./redux/toDoReducer";
 
 const mapStateToProps = (state)=>{
     return{
@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch) =>{
         updateDescriptionText: (newDescription) => dispatch( updateDescriptionAC(newDescription) ),
         addNewTask: (time) => dispatch( addNewTaskAC(time) ),
         complete: (taskId) => dispatch( CompleteAC(taskId) ),
-        uncomplete: (taskId) => dispatch( UncompleteAC(taskId) ) 
+        uncomplete: (taskId) => dispatch( UncompleteAC(taskId) ),
+        deleteTask: (taskId) => dispatch( deleteTaskAC(taskId) ) 
     }
 }
 

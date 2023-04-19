@@ -14,6 +14,11 @@ const Task = (props)=>{
         props.uncomplete( props.taskId )
     }
 
+    let deleteTaskCaller = () =>{
+        props.deleteTask( props.taskId )
+        
+    }
+
     return(
         
             <div className={s.task}>
@@ -43,7 +48,7 @@ const Task = (props)=>{
                 }
                     
 
-                    <button> <img src={DeleteIcon} alt="Delete" /> </button>
+                    <button onClick={deleteTaskCaller} type='button'> <img src={DeleteIcon} alt="Delete" /> </button>
                 </div>
 
             </div>
