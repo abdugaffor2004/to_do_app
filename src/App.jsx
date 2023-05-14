@@ -21,9 +21,9 @@ let App = (props) => {
 }
 
   const addNewTaskCaller = () => {
-    // let date = new Date
-    // let time = date.toLocaleTimeString() // Отправляем актуальное время добавления заметки 
-    props.addNewTask() //<--time
+    let date = new Date
+    let time = date.toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }) // Отправляем актуальное время добавления заметки 
+    props.addNewTask(time) //<--time
   }
 
 
@@ -34,7 +34,9 @@ let App = (props) => {
                                                       complete={props.complete}
                                                       uncomplete={props.uncomplete}
                                                       completedStatus={item.isCompleted}
-                                                      deleteTask={props.deleteTask} />)
+                                                      deleteTask={props.deleteTask}
+                                                      createdTime ={item.date.time} />)
+                                                      debugger
 
   return (
     <div className={s.App}>

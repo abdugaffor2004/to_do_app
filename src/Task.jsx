@@ -40,15 +40,21 @@ const Task = (props)=>{
                 </div>
 
                 <div className={s.controlls}> 
-                {
-                    props.completedStatus ? 
-                    <button onClick={uncompleteCaller} type='button'> <img src={DoneIconCompleted} alt="completed" /> </button>
-                    : <button onClick={completeCaller} type='button'> <img src={DoneIconUncompleted} alt="uncompleted" /> </button>
-                     
-                }
+
+                    <div className={s.time}>
+                            {props.createdTime}
+                    </div>
+
+                    {
+                        props.completedStatus ? 
+                        <button onClick={uncompleteCaller} type='button'> <img src={DoneIconCompleted} alt="completed" /> </button>
+                        : <button onClick={completeCaller} type='button'> <img src={DoneIconUncompleted} alt="uncompleted" /> </button> 
+                    }
                     
 
                     <button onClick={deleteTaskCaller} type='button'> <img src={DeleteIcon} alt="Delete" /> </button>
+
+                    
                 </div>
 
             </div>

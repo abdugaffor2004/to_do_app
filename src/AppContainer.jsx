@@ -6,7 +6,8 @@ const mapStateToProps = (state)=>{
     return{
         taskTitle: state.toDoApp.taskTitle,
         taskDescription: state.toDoApp.taskDescription,
-        taskData: state.toDoApp.taskData
+        taskData: state.toDoApp.taskData,
+        
     }
 }
 

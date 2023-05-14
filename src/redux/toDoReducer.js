@@ -1,3 +1,4 @@
+import GetDate from "../Common/getDate";
 
 const UPDATE_DESCRIPTION = 'UPDATE-DESCRIPTION';
 const UPDATE_TITLE = 'UPDATE-TITLE'
@@ -6,11 +7,6 @@ const COMPLETE = "COMPLETE"
 const UNCOMPLETE = "UNCOMPLETE"
 const DELETE_TASK = "DELETE-TASK"
 
-// let dateData = new Date()
-//         let year = dateData.getFullYear()
-//         let day = new Intl.DateTimeFormat('default', {weekday: 'long'}).format(dateData)
-//         let month = new Intl.DateTimeFormat('default', {month:'long'}).format(dateData)
-//         let dayDigit = dateData.toLocaleString('default', {day:"2-digit"})
 
 const initialState = {
   taskDescription: '',
@@ -50,8 +46,8 @@ const toDoReducer = (state = initialState, action) => {
         id: Math.floor(Math.random() * 100),
         newTaskTitle: state.taskTitle,
         newTaskDescription: state.taskDescription,
-        isCompleted: false
-        // date: {year, day, month, dayDigit, time: action.time}
+        isCompleted: false,
+        date: {time: action.time}
       }
 
       let stateCopy ={
@@ -124,8 +120,8 @@ export let updateDescriptionAC = (newDescription) => {
   return { type: UPDATE_DESCRIPTION, newDescription };
 };
 
-export let addNewTaskAC = () =>{
-  return {type: ADD_NEW_TASK}
+export let addNewTaskAC = (time) =>{
+  return {type: ADD_NEW_TASK, time}
 }
 
 export let CompleteAC = (taskId) =>{
